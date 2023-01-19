@@ -2,10 +2,8 @@ function solution(fees, records) {
   const parkingChecker = {};
   const timeCounter = {};
 
-  const revisedRecords = records.map((record) => record.split(" "));
-
-  for (const record of revisedRecords) {
-    const [time, carNumber] = record;
+  for (const record of records) {
+    const [time, carNumber] = record.split(" ");
 
     if (!parkingChecker[carNumber]) {
       parkingChecker[carNumber] = time;

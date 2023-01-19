@@ -8,6 +8,13 @@ var isValidSudoku = function (board) {
   const boardSize = board.length;
   const subSize = Math.sqrt(boardSize);
 
+  for (let i = 0; i < subSize; i++) {
+    for (let j = 0; j < subSize; j++) {
+      checkSubBox(i, j);
+      if (isFail) return false;
+    }
+  }
+
   for (let i = 0; i < boardSize; i++) {
     checkRow(i, boardSize);
     if (isFail) return false;
@@ -18,24 +25,17 @@ var isValidSudoku = function (board) {
     if (isFail) return false;
   }
 
-  for (let i = 0; i < subSize; i++) {
-    for (let j = 0; j < subSize; j++) {
-      checkSubBox(i, j);
-      if (isFail) return false;
-    }
-  }
-
   return true;
 
   function checkRow(row, size) {
     for (let i = 0; i < size; i++) {
       if (board[row][i] !== ".") {
-        if (!freqCounter[board[row][i]]) {
-          freqCounter[board[row][i]] = true;
-        } else {
+        if (freqCounter[board[row][i]]) {
           isFail = true;
           break;
         }
+
+        freqCounter[board[row][i]] = true;
       }
     }
 
@@ -45,12 +45,12 @@ var isValidSudoku = function (board) {
   function checkColumn(column, size) {
     for (let i = 0; i < size; i++) {
       if (board[i][column] !== ".") {
-        if (!freqCounter[board[i][column]]) {
-          freqCounter[board[i][column]] = true;
-        } else {
+        if (freqCounter[board[i][column]]) {
           isFail = true;
           break;
         }
+
+        freqCounter[board[i][column]] = true;
       }
     }
 
@@ -61,15 +61,15 @@ var isValidSudoku = function (board) {
     const startRow = 3 * row;
     const startColumn = 3 * column;
 
-    for (let i = startRow; i < startRow + 3; i++) {
-      for (let j = startColumn; j < startColumn + 3; j++) {
+    for (let i = startRow; i < startRow + subSize; i++) {
+      for (let j = startColumn; j < startColumn + subSize; j++) {
         if (board[i][j] !== ".") {
-          if (!freqCounter[board[i][j]]) {
-            freqCounter[board[i][j]] = true;
-          } else {
+          if (freqCounter[board[i][j]]) {
             isFail = true;
             break;
           }
+
+          freqCounter[board[i][j]] = true;
         }
       }
     }

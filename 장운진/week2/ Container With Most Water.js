@@ -1,21 +1,21 @@
 var maxArea = function (height) {
-  let left = 0;
-  let right = height.length - 1;
+  let leftIndex = 0;
+  let rightIndex = height.length - 1;
   let maxContainerArea = 0;
 
-  while (left < right) {
-    const leftValue = height[left];
-    const rightValue = height[right];
-    const currentMinValue = Math.min(height[left], height[right]);
-    const currentGraphLength = Math.abs(left - right);
+  while (leftIndex < rightIndex) {
+    const leftValue = height[leftIndex];
+    const rightValue = height[rightIndex];
+    const currentMinValue = Math.min(height[leftIndex], height[rightIndex]);
+    const currentGraphLength = Math.abs(leftIndex - rightIndex);
     const currentContainerArea = currentMinValue * currentGraphLength;
 
     maxContainerArea = Math.max(maxContainerArea, currentContainerArea);
 
     if (leftValue < rightValue) {
-      left++;
+      leftIndex++;
     } else {
-      right--;
+      rightIndex--;
     }
   }
 

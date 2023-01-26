@@ -5,11 +5,11 @@ function solution(genres, plays) {
   genres.forEach(createGenrePlayInfo.bind(null, genresPlayInfo, plays));
   
   const sortedGenres = Object.entries(genresPlayInfo)
-    .sort(sortAscendingOrder)
+    .sort(sortDescendingOrder)
     .map(([genre, info]) => {
       delete info.sum;
       
-      const sortedSong = Object.entries(info).sort(ascendingOrder);
+      const sortedSong = Object.entries(info).sort(descendingOrder);
       
       return sortedSong;
     });
@@ -34,11 +34,11 @@ function createGenrePlayInfo (genresPlayInfo, plays, genre, index) {
   }
 }
 
-function ascendingOrder ([indexA, playsA], [indexB, playsB]) {
+function descendingOrder ([indexA, playsA], [indexB, playsB]) {
   return playsB - playsA;
 }
 
-function sortAscendingOrder([genreA, infoA], [genreB, infoB]) {
+function sortDescendingOrder([genreA, infoA], [genreB, infoB]) {
   return infoB.sum - infoA.sum;
 }
 
@@ -50,4 +50,3 @@ function selectBestSong (bestAlbum, genre) {
     bestAlbum.push(Number(index));
   }
 }
-// 재생된 장르 > 장르네 재생수 > 고유 번호 낮은 순

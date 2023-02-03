@@ -17,26 +17,27 @@ var maxSlidingWindow = function(nums, k) {
 // time limit
 
 var maxSlidingWindow = function(nums, k) {
-  const result = [];
-  const q = [];
+    const result = [];
+    const q = [];
 
-  for (let i = 0; i < nums.length; i++) {
-      while (q && nums[q[q.length - 1]] <= nums[i]) {
-          q.pop();
-      }
+    for (let i = 0; i < nums.length; i++) {
+        const num = nums[i];
 
-      q.push(i);
+        while (q && nums[q[q.length - 1]] <=  num) { // index를 모아두는 q의 값들이 새로운 num보다 작으면 pop
+            q.pop();
+        }
 
-      if (q[0] === i - k) {
-          q.shift();
-      }
+        q.push(i);
 
-      if (i >= k - 1) {
-          result.push(nums[q[0]]);
-      }
-  }
+        if (q[0] === i - k) { // sliding window 앞 부분이 다 찼을때, 앞 부분 빼주기
+            q.shift();
+        }
 
-  return result;
+        if (i >=  k - 1) { // sliding window가 가득찬 이후부터는 result에 계속 결과값 입력
+            result.push(nums[q[0]]);
+        }
+    }
+    return result;
 };
 
 // monotonic deque

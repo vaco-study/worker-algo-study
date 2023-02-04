@@ -1,33 +1,36 @@
 function solution(genres, plays) {
-	const allGenresWithPlays = new Map();
-	
-	for (let i = 0; i < genres.length; i++) {
-		const genre = genres[i];
+  const allGenresWithPlays = new Map();
 
-		if (!allGenresWithPlays.has(genre)) {
-			allGenresWithPlays.set(genre, {
-				totalPlays: plays[i],
-				songs: [{index: i, plays: plays[i]}],
-			})
+  for (let i = 0; i < genres.length; i++) {
+    const genre = genres[i];
 
-			continue;
-		}
+    if (!allGenresWithPlays.has(genre)) {
+      allGenresWithPlays.set(genre, {
+        totalPlays: plays[i],
+        songs: [{ index: i, plays: plays[i] }],
+      });
 
-		const genreWithPlay = allGenresWithPlays.get(genre)
+      continue;
+    }
 
-		allGenresWithPlays.set(genre, {
-			totalPlays: genreWithPlay.totalPlays + plays[i],
-			songs: [...genreWithPlay.songs, {index: i, plays: plays[i]}]
-		})
-	}
+    const genreWithPlay = allGenresWithPlays.get(genre);
 
-	const sortedByTotalPlays = [...allGenresWithPlays].sort((a,b) => b[1].totalPlays - a[1].totalPlays);
+    allGenresWithPlays.set(genre, {
+      totalPlays: genreWithPlay.totalPlays + plays[i],
+      songs: [...genreWithPlay.songs, { index: i, plays: plays[i] }],
+    });
+  }
 
-	const sortedByPlay = sortedByTotalPlays.map(([genre, datas]) => {
-		const sortedSongs = datas.songs.sort((a,b) => b.plays - a.plays || a.index - b.index );
+  const sortedByTotalPlays = [...allGenresWithPlays].sort(
+    (a, b) => b[1].totalPlays - a[1].totalPlays
+  );
 
-		return sortedSongs.slice(0, 2).map((song) => song.index);
-	})
+  const sortedByPlay = sortedByTotalPlays
+    .map(([genre, datas]) => {
+      return datas.songs.sort((a, b) => b.plays - a.plays || a.index - b.index);
+    })
+    .slice(0, 2)
+    .map((song) => song.index);
 
-  return sortedByPlay.flat(2)
+  return sortedByPlay.flat(2);
 }

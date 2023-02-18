@@ -1,6 +1,6 @@
+// 1차 풀이 - 효율성 미통과
 function solution(rc, operations) {
   let answer = JSON.parse(JSON.stringify(rc));
-  // let answer = structuredClone(rc);
 
   for (let i = 0; i < operations.length; i++) {
     if (operations[i] === "Rotate") {
@@ -13,7 +13,6 @@ function solution(rc, operations) {
   return answer;
 }
 
-//ShiftRow 구하기
 const getShiftRow = (rc) => {
   const copied = JSON.parse(JSON.stringify(rc));
   const shifted = [];
@@ -31,7 +30,6 @@ const getShiftRow = (rc) => {
   return shifted;
 };
 
-//Rotate 구하기 (행렬 바깥쪽의 원소들만 한 칸 회전)
 const getRotate = (rc) => {
   const copied = JSON.parse(JSON.stringify(rc));
 

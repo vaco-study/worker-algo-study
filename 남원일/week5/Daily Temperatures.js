@@ -28,3 +28,24 @@ var dailyTemperatures = function (temperatures) {
 
   return answer;
 };
+
+// 좋은 풀이
+
+var dailyTemperatures2 = function (temperatures) {
+  let n = temperatures.length;
+  let stack = new Array();
+  let res = new Array(n).fill(0);
+
+  for (let i = n - 1; i >= 0; i--) {
+    while (
+      stack.length &&
+      temperatures[i] >= temperatures[stack[stack.length - 1]]
+    ) {
+      stack.pop();
+    }
+
+    res[i] = stack[stack.length - 1] ? stack[stack.length - 1] - i : 0;
+    stack.push(i);
+  }
+  return res;
+};

@@ -1,6 +1,6 @@
 function solution(queue1, queue2) {
-  let queue1Sum = queue1.reduce((prev, curr) => prev + curr, 0);
-  let queue2Sum = queue2.reduce((prev, curr) => prev + curr, 0);
+  let queue1Sum = queue1.reduce((acc, curr) => acc + curr, 0);
+  let queue2Sum = queue2.reduce((acc, curr) => acc + curr, 0);
 
   let queue1Index = 0;
   let queue2Index = 0;

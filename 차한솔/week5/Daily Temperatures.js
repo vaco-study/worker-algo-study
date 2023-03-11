@@ -1,8 +1,10 @@
 var dailyTemperatures = function (temperatures) {
-  const queue = [{
-		index: 0,
-		temperature: temperatures[0]
-	}];
+  const queue = [
+    {
+      index: 0,
+      temperature: temperatures[0],
+    },
+  ];
   const answer = [];
 
   for (let i = 1; i < temperatures.length; i++) {
@@ -17,9 +19,9 @@ var dailyTemperatures = function (temperatures) {
     });
   }
 
-	queue.forEach((value) => {
-		answer[value.index] = 0
-	})
+  queue.forEach((value) => {
+    answer[value.index] = 0;
+  });
 
   return answer;
 };

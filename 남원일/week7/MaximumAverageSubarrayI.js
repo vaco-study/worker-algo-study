@@ -13,3 +13,5 @@ var findMaxAverage = function (nums, k) {
 
   return maxSum / k;
 };
+
+a ? 3 : 1;

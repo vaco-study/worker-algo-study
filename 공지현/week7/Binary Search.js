@@ -8,8 +8,9 @@ var search = function (nums, target) {
 
   const midIndex = Math.floor(nums.length / 2);
 
-  if (nums[midIndex] === target) return midIndex;
-  else if (nums[midIndex] > target) {
+  if (nums[midIndex] === target) {
+    return midIndex;
+  } else if (nums[midIndex] > target) {
     const result = search(nums.slice(0, midIndex), target);
 
     return result === -1 ? -1 : result;

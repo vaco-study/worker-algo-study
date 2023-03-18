@@ -6,18 +6,16 @@
 var minimumDifference = function (nums, k) {
   const ascendingNums = nums.sort((a, b) => a - b);
 
-  let result = Math.max(...ascendingNums);
+  let minDiff = ascendingNums[ascendingNums.length - 1];
 
   for (let i = 0; i + k <= ascendingNums.length; i++) {
-    const sliced = ascendingNums.slice(i, i + k);
-
-    const max = Math.max(...sliced);
-    const min = Math.min(...sliced);
+    const max = ascendingNums[i + k - 1];
+    const min = ascendingNums[i];
 
     const diff = max - min;
 
-    if (diff < result) result = diff;
+    if (diff < minDiff) minDiff = diff;
   }
 
-  return result;
+  return minDiff;
 };
